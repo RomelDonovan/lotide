@@ -15,29 +15,27 @@ const assertEqual = function(actual, expected) {
   }
 };
 
-// Returns true if both objects have identical keys with identical values.
-// Otherwise you get back a big fat false!
 const eqObjects = function(object1, object2) {
-  //console.log(Object.keys(shirtObject));
-  const shirtArr1 = Object.keys(object1);
-  const shirtArr2 = Object.keys(object2);
-  // console.log(object1, object2);
-  if (shirtArr1.length !== shirtArr2.length) {
+  if (Object.keys(object1).length !== Object.keys(object2).length) {
     return false;
   }
-  for (let shirt of shirtArr1) {
-    if (typeof object1[shirt] !== typeof object2[shirt]) {
+  for (let key in object1) {
+    if (Array.isArray(object1[key]) && Array.isArray(object2[key])) {
+      return eqArrays(object1[key], object2[key]);
+    } else if ((typeof(object1[key]) !== typeof({}) && typeof(object2[key]) !== typeof({})) && (object1[key] !== object2[key])) {
       return false;
-    } else {
-      return true;
+    } else if ((typeof(object1[key]) === typeof({}) || typeof(object1[key]) === typeof({})) && eqObjects(object1[key], object2[key]) === false) {
+      return false;
+    } else if (typeof(object1[key]) === typeof({}) || typeof(object1[key]) === typeof({})) {
+      eqObjects(object1[key], object2[key]);
     }
   }
+  return true;
 };
 
 const shirtObject = { color: "red", size: "medium" };
 const anotherShirtObject = { size: "medium", color: "red" };
 eqObjects(shirtObject , anotherShirtObject); // => true
-//We need to use that return value in combination with assertEquals to test if the function is working correctly.
 assertEqual(eqObjects(shirtObject , anotherShirtObject), true);
 assertEqual(eqArrays(shirtObject , anotherShirtObject),true);
 

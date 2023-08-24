@@ -16,15 +16,11 @@ const assertArraysEqual = function(actual, expected) {
 };
 
 const letterPositions = function(sentence) {
+  let removeSpace = sentence.split("");
   const results = {};
-  // logic to update results here
-  // loop through the string
-  for (let i = 0; i < sentence.length; i++) {
-    console.log(sentence[i]);
-    // if not in obj, add it as an array
+  for (let i = 0; i < removeSpace.length; i++) {
     if (!results[sentence[i]]) {
       results[sentence[i]] = [];
-    // if its already in the obj, add it to the existing array
     } else {
       results[sentence[i]].push(i);
     }
