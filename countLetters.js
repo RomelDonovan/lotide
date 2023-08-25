@@ -1,21 +1,20 @@
 const assertEqual = function(actual, expected) {
-  if (actual !== expected) {
-    console.log(`🛑🛑🛑 Assertion Failed: ${actual} !== ${expected}`);
+  if (actual === expected) {
+    console.log(`✅✅✅  Assertion passed: ${actual} === ${expected}`);
   } else {
-    console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
+    console.log(`🛑🛑🛑  Assertion failed: ${actual} !== ${expected}`);
   }
 };
 
 const countLetters = function(str) {
-  let removeSpace = str.split(" ").join("");
+  const removeSpace = str.split(" ").join("");
   const strLowercase = removeSpace.toLowerCase();
-  let letterCounter = {};
+  const letterCounter = {};
   for (let letter of strLowercase) {
     if (!letterCounter[letter]) {
-      letterCounter[letter] = 1;
-    } else {
-      letterCounter[letter]++;
+      letterCounter[letter] = 0;
     }
+    letterCounter[letter]++;
   }
   return letterCounter;
 };
