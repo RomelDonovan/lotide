@@ -1,6 +1,4 @@
-// FUNCTION IMPLEMENTATION
-const assertEqual = function(actual, expected) {
-  // If statement to compare the two args
+const assertEqual = (actual, expected) => {
   if (actual !== expected) {
     console.log(`🛑🛑🛑 Assertion Failed: ${actual} !== ${expected}`);
   } else {
